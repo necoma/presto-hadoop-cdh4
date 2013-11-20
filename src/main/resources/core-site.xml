@@ -4,4 +4,12 @@
         <name>dfs.client.use.legacy.blockreader</name>
         <value>true</value>
     </property>
+  <property>
+    <name>dfs.client.read.shortcircuit</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.domain.socket.path</name>
+    <value>/tmp/dn_socket</value>
+  </property>
 </configuration>

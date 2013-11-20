@@ -9,12 +9,12 @@
     </parent>
 
     <groupId>com.facebook.presto.hadoop</groupId>
-    <artifactId>hadoop-cdh4</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <artifactId>hadoop-cdh5</artifactId>
+    <version>0.6</version>
 
-    <name>hadoop-cdh4</name>
-    <description>Shaded version of CDH4 Hadoop for Presto</description>
-    <url>https://github.com/facebook/presto-hadoop-cdh4</url>
+    <name>hadoop-cdh5</name>
+    <description>Shaded version of CDH5 Hadoop for Presto</description>
+    <url>https://github.com/facebook/presto-hadoop-cdh5</url>
 
     <inceptionYear>2013</inceptionYear>
 
@@ -30,19 +30,21 @@
         <!-- see original projects for developer information -->
     </developers>
 
+<!--
     <scm>
         <connection>scm:git:git://github.com/facebook/presto-hadoop-cdh4.git</connection>
         <developerConnection>scm:git:git://github.com/facebook/presto-hadoop-cdh4.git</developerConnection>
         <url>https://github.com/facebook/presto-hadoop-cdh4</url>
         <tag>HEAD</tag>
     </scm>
+-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetJdk>1.7</project.build.targetJdk>
         <shadeBase>com.facebook.presto.hadoop.shaded</shadeBase>
-        <dep.hadoop.version>2.0.0-cdh4.3.0</dep.hadoop.version>
-        <dep.slf4j.version>1.6.6</dep.slf4j.version>
+        <dep.hadoop.version>2.2.0-cdh5.0.0-beta-1</dep.hadoop.version>
+        <dep.slf4j.version>1.7.5</dep.slf4j.version>
     </properties>
 
     <repositories>
@@ -118,6 +120,7 @@
                     <groupId>org.codehaus.jackson</groupId>
                     <artifactId>jackson-mapper-asl</artifactId>
                 </exclusion>
+<!--
                 <exclusion>
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty</artifactId>
@@ -126,6 +129,11 @@
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty-util</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.netty</groupId>
+                    <artifactId>netty</artifactId>
+                </exclusion>
+-->
                 <exclusion>
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-core</artifactId>
@@ -246,6 +254,12 @@
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-server</artifactId>
                 </exclusion>
+<!--
+                <exclusion>
+                    <groupId>org.jboss.netty</groupId>
+                    <artifactId>netty</artifactId>
+                </exclusion>
+-->
                 <exclusion>
                     <groupId>org.codehaus.jackson</groupId>
                     <artifactId>jackson-core-asl</artifactId>
@@ -297,6 +311,10 @@
                 <exclusion>
                     <groupId>com.google.inject.extensions</groupId>
                     <artifactId>guice-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.jboss.netty</groupId>
@@ -386,6 +404,7 @@
                 </executions>
                 <configuration>
                     <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
+
                 </configuration>
             </plugin>
 
@@ -448,6 +467,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+<!-- minimizeJar>true</minimizeJar -->
                             <createSourcesJar>true</createSourcesJar>
                             <keepDependenciesWithProvidedScope>false</keepDependenciesWithProvidedScope>
                             <transformers>

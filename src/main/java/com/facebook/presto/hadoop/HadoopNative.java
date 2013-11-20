@@ -45,11 +45,12 @@ public final class HadoopNative
         }
         try {
             loadLibrary("hadoop");
-            loadLibrary("snappy");
+            loadLibrary("hdfs");
+            //loadLibrary("snappy");
             setStatic(NativeCodeLoader.class.getDeclaredField("nativeCodeLoaded"), true);
 
             // verify that all configured codec classes can be loaded
-            loadAllCodecs();
+//            loadAllCodecs();
 
             loaded = true;
         }
@@ -62,7 +63,9 @@ public final class HadoopNative
     private static void loadAllCodecs()
     {
         Configuration conf = new Configuration();
-        CompressionCodecFactory factory = new CompressionCodecFactory(conf);
+        CompressionCodecFactory factory = null;
+try{
+        factory = new CompressionCodecFactory(conf);
         for (Class<? extends CompressionCodec> clazz : getCodecClasses(conf)) {
             CompressionCodec codec = factory.getCodecByClassName(clazz.getName());
             if (codec == null) {
@@ -70,6 +73,9 @@ public final class HadoopNative
             }
             codec.getDecompressorType();
         }
+}catch (Error e){
+System.out.println (e);
+}
     }
 
     private static void setStatic(Field field, Object value)
